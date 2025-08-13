@@ -563,22 +563,38 @@
         }
 
         .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .contact-info {
             font-size: 1.1rem;
             line-height: 2;
+            margin-bottom: 40px;
         }
 
         .contact-item {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            margin: 10px;
+            min-width: 280px;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .contact-item-content {
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 20px;
         }
 
         .contact-icon {
@@ -659,13 +675,14 @@
                 gap: 20px;
             }
 
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
             .cta-buttons {
                 flex-direction: column;
+            }
+
+            .contact-item {
+                margin: 5px;
+                padding: 12px 20px;
+                min-width: 250px;
             }
         }
 
@@ -907,7 +924,7 @@
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">1C:УТ</span>
-                            <span class="tech-tag">Честный ЗНАК</span>
+                            <span class="tech-tag">Asl Belgisi</span>
                             <span class="tech-tag">DataMatrix</span>
                         </div>
                         <a href="#" class="project-link">Подробнее →</a>
@@ -955,55 +972,41 @@
             <h2 class="section-title fade-in">Связаться со мной</h2>
             <div class="contact-content">
                 <div class="contact-info fade-in">
-                    <h3 style="margin-bottom: 30px;">Готов обсудить ваш проект</h3>
+                    <h3 style="margin-bottom: 30px; font-size: 1.8rem;">Готов обсудить ваш проект</h3>
                     
-                    <div class="contact-item">
-                        <span class="contact-icon">📧</span>
-                        <span>e.pecheykin@gmail.com</span>
+                    <div style="margin-bottom: 40px;">
+                        <div class="contact-item">
+                            <div class="contact-item-content">
+                                <span class="contact-icon">📧</span>
+                                <span>evgeniy@pecheykin.dev</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-item-content">
+                                <span class="contact-icon">📱</span>
+                                <span>+998 97 005 97 83</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-item-content">
+                                <span class="contact-icon">📍</span>
+                                <span>Ташкент, Узбекистан</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-item-content">
+                                <span class="contact-icon">⏰</span>
+                                <span>UTC+5 | Готов к удаленной работе</span>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="contact-item">
-                        <span class="contact-icon">📱</span>
-                        <span>+998 97 005 97 83</span>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <span class="contact-icon">💬</span>
-                        <span>@e_pecheykin</span>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <span class="contact-icon">📍</span>
-                        <span>Ташкент, Узбекистан</span>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <span class="contact-icon">⏰</span>
-                        <span>UTC+5 | Готов к удаленной работе</span>
-                    </div>
-                </div>
 
-                <div class="contact-form fade-in">
-                    <form>
-                        <div class="form-group">
-                            <label>Ваше имя</label>
-                            <input type="text" placeholder="Введите ваше имя">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" placeholder="your@email.com">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Сообщение</label>
-                            <textarea rows="5" placeholder="Опишите ваш проект..."></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">
-                            Отправить сообщение
-                        </button>
-                    </form>
+                    <a href="https://t.me/e_pecheykin" target="_blank" class="btn btn-primary" style="font-size: 1.2rem; padding: 20px 40px; text-decoration: none; display: inline-block;">
+                        ✈️ Написать в Telegram
+                    </a>
                 </div>
             </div>
         </div>
