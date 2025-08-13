@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+.contact-icon {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -597,9 +600,76 @@
             gap: 15px;
         }
 
-        .contact-icon {
-            font-size: 1.5rem;
-            color: var(--accent);
+        .cta-block {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #00ff88);
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .cta-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .telegram-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #0088cc, #00aaff);
+            color: white;
+            padding: 18px 35px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 136, 204, 0.4);
+            margin-bottom: 20px;
+        }
+
+        .telegram-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 136, 204, 0.6);
+            background: linear-gradient(135deg, #0099dd, #00bbff);
+        }
+
+        .telegram-icon {
+            font-size: 1.3rem;
+        }
+
+        .response-time {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            margin-top: 15px;
         }
 
         .contact-form {
@@ -971,21 +1041,42 @@
         <div class="container">
             <h2 class="section-title fade-in">Связаться со мной</h2>
             <div class="contact-content">
+                <div class="cta-block fade-in">
+                    <h3 class="cta-title">Получите консультацию за 30 минут</h3>
+                    <p class="cta-subtitle">
+                        Напишите мне в Telegram и получите персональный план<br>
+                        автоматизации вашего бизнеса на 1С
+                    </p>
+                    
+                    <a href="https://t.me/e_pecheykin" target="_blank" class="telegram-button">
+                        <span class="telegram-icon">✈️</span>
+                        <div>
+                            <div>Написать в Telegram</div>
+                            <div style="font-size: 0.9rem; opacity: 0.8;">@e_pecheykin</div>
+                        </div>
+                    </a>
+                    
+                    <div class="response-time">
+                        <span>⚡</span>
+                        <span>Отвечаю в течение 15 минут</span>
+                    </div>
+                </div>
+                
                 <div class="contact-info fade-in">
-                    <h3 style="margin-bottom: 30px; font-size: 1.8rem;">Готов обсудить ваш проект</h3>
+                    <h3 style="margin-bottom: 30px; font-size: 1.8rem;">Другие способы связи</h3>
                     
                     <div style="margin-bottom: 40px;">
                         <div class="contact-item">
                             <div class="contact-item-content">
                                 <span class="contact-icon">📧</span>
-                                <span>evgeniy@pecheykin.dev</span>
+                                <span><a href="mailto:evgeniy@pecheykin.dev" style="color: inherit; text-decoration: none;">evgeniy@pecheykin.dev</a></span>
                             </div>
                         </div>
                         
                         <div class="contact-item">
                             <div class="contact-item-content">
                                 <span class="contact-icon">📱</span>
-                                <span>+998 97 005 97 83</span>
+                                <span><a href="tel:+998970059783" style="color: inherit; text-decoration: none;">+998 97 005 97 83</a></span>
                             </div>
                         </div>
                         
@@ -1003,10 +1094,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <a href="https://t.me/e_pecheykin" target="_blank" class="btn btn-primary" style="font-size: 1.2rem; padding: 20px 40px; text-decoration: none; display: inline-block;">
-                        ✈️ Написать в Telegram
-                    </a>
                 </div>
             </div>
         </div>
