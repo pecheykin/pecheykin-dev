@@ -1695,11 +1695,11 @@
                 return;
             }
             
-            // Validate telegram if provided - using IMask validation
-            if (telegramValue && telegramValue.length > 1 && !telegramMask.masked.isComplete) {
+            // Validate telegram if provided - simple format check
+            if (telegramValue && !telegramValue.match(/^@[a-zA-Z0-9_]{1,}$/)) {
                 telegramInput.classList.add('error');
                 hasErrors = true;
-                showFormMessage('error', '❌ Введите корректный Telegram username');
+                showFormMessage('error', '❌ Telegram должен содержать только английские буквы, цифры и _');
                 return;
             }
             
@@ -1722,21 +1722,37 @@
             
             // Simulate form submission (since we can't use real backend in artifacts)
             try {
-                // Simulate API call delay
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                // Отправляем данные на Netlify функцию
+                const response = await fetch('/.netlify/functions/telegram-bot', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: nameInput.value.trim(),
+                        telegramContact: telegramValue || null,
+                        phoneContact: phoneValue !== '+998 ' ? phoneValue : null,
+                        message: messageInput.value.trim()
+                    })
+                });
                 
-                // Simulate successful submission
-                showFormMessage('success', '✅ Заявка отправлена! Евгений ответит в течение 15 минут.');
-                e.target.reset();
+                const result = await response.json();
                 
-                // Reset form after success
-                setTimeout(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalHTML;
-                    hideFormMessage();
-                }, 5000);
-                
+                if (response.ok && result.success) {
+                    showFormMessage('success', '✅ Заявка отправлена! Евгений ответит в течение 15 минут.');
+                    e.target.reset();
+                    
+                    // Reset form after success
+                    setTimeout(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalHTML;
+                        hideFormMessage();
+                    }, 5000);
+                } else {
+                    throw new Error(result.error || 'Ошибка отправки');
+                }
             } catch (error) {
+                console.error('Form submission error:', error);
                 showFormMessage('error', 
                     '❌ Ошибка отправки. Попробуйте позже или напишите напрямую: ' +
                     '<a href="https://t.me/e_pecheykin" target="_blank" style="color: #ef4444; text-decoration: underline;">@e_pecheykin</a>'
