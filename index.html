@@ -1571,12 +1571,12 @@
                 nav.style.padding = '20px 0';
             }
             
-            // Hide/show navbar on scroll
-            if (scrollTop > lastScrollTop && scrollTop > 200) {
-                nav.style.transform = 'translateY(-100%)';
-            } else {
-                nav.style.transform = 'translateY(0)';
-            }
+            // Hide/show navbar on scroll - закомментировано для постоянной видимости
+            // if (scrollTop > lastScrollTop && scrollTop > 200) {
+            //     nav.style.transform = 'translateY(-100%)';
+            // } else {
+            //     nav.style.transform = 'translateY(0)';
+            // }
             lastScrollTop = scrollTop;
         });
 
@@ -1731,7 +1731,7 @@
                     body: JSON.stringify({
                         name: nameInput.value.trim(),
                         telegramContact: telegramValue || null,
-                        phoneContact: phoneValue !== '+998 ' ? phoneValue : null,
+                        phoneContact: phoneValue || null,
                         message: messageInput.value.trim()
                     })
                 });
