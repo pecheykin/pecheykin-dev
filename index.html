@@ -1627,46 +1627,16 @@
             });
         });
 
-        // Enhanced Telegram input with better validation
+        // Simple telegram input with auto @ prefix
         const telegramInput = document.getElementById('telegramContact');
+        
+        // Auto-add @ when user starts typing
         telegramInput.addEventListener('input', (e) => {
             let value = e.target.value;
             
-            // Remove any @ symbols first
-            value = value.replace(/@/g, '');
-            
-            // Remove any non-alphanumeric characters except underscore
-            value = value.replace(/[^a-zA-Z0-9_]/g, '');
-            
-            // Add @ at the beginning if there's any content
-            if (value.length > 0) {
-                value = '@' + value;
-            }
-            
-            e.target.value = value;
-        });
-
-        telegramInput.addEventListener('keydown', (e) => {
-            // Prevent deletion of @ if cursor is at position 1
-            if (e.target.selectionStart === 1 && e.target.selectionEnd === 1 && 
-                (e.key === 'Backspace' || e.key === 'Delete')) {
-                e.preventDefault();
-            }
-        });
-
-        telegramInput.addEventListener('paste', (e) => {
-            e.preventDefault();
-            let paste = (e.clipboardData || window.clipboardData).getData('text');
-            
-            // Clean the pasted text
-            paste = paste.replace(/[^a-zA-Z0-9_@]/g, '');
-            if (paste.startsWith('@')) {
-                paste = paste.substring(1);
-            }
-            
-            // Set the cleaned value
-            if (paste.length > 0) {
-                e.target.value = '@' + paste;
+            // If user typed something and it doesn't start with @, add it
+            if (value.length > 0 && !value.startsWith('@')) {
+                e.target.value = '@' + value;
             }
         });
 
@@ -1725,11 +1695,11 @@
                 return;
             }
             
-            // Validate telegram if provided
-            if (telegramValue && (!telegramValue.startsWith('@') || telegramValue.length < 4)) {
+            // Validate telegram if provided - using IMask validation
+            if (telegramValue && telegramValue.length > 1 && !telegramMask.masked.isComplete) {
                 telegramInput.classList.add('error');
                 hasErrors = true;
-                showFormMessage('error', '❌ Telegram должен начинаться с @ и содержать минимум 3 символа');
+                showFormMessage('error', '❌ Введите корректный Telegram username');
                 return;
             }
             
