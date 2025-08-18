@@ -11,11 +11,10 @@ exports.handler = async (event, context) => {
     // Парсим данные из формы
     const { name, telegramContact, phoneContact, message } = JSON.parse(event.body);
     
-    // Определяем способ связи
-    // Показываем все способы связи
+    // Показываем все способы связи с иконками
 let contactInfo = [];
-if (telegramContact) contactInfo.push(`Telegram: ${telegramContact}`);
-if (phoneContact) contactInfo.push(`Телефон: ${phoneContact}`);
+if (telegramContact) contactInfo.push(`📱 Telegram: ${telegramContact}`);
+if (phoneContact) contactInfo.push(`📞 Телефон: ${phoneContact}`);
 const contact = contactInfo.length > 0 ? contactInfo.join('\n') : 'не указан';
     
     // Получаем токен из переменных окружения (безопаснее)
