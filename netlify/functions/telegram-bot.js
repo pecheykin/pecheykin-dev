@@ -12,8 +12,11 @@ exports.handler = async (event, context) => {
     const { name, telegramContact, phoneContact, message } = JSON.parse(event.body);
     
     // Определяем способ связи
-    const contact = telegramContact || phoneContact || 'не указан';
-    const contactType = telegramContact ? 'Telegram' : 'Телефон';
+    // Показываем все способы связи
+let contactInfo = [];
+if (telegramContact) contactInfo.push(`Telegram: ${telegramContact}`);
+if (phoneContact) contactInfo.push(`Телефон: ${phoneContact}`);
+const contact = contactInfo.length > 0 ? contactInfo.join('\n') : 'не указан';
     
     // Получаем токен из переменных окружения (безопаснее)
     const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '8378655892:AAHFlpTOjpIwNXbvYPvrXIoxD_5v3E0uyAc';
@@ -21,20 +24,18 @@ exports.handler = async (event, context) => {
     
     // Формируем красивое сообщение
     const text = `🔥 НОВАЯ ЗАЯВКА С САЙТА
-
 👤 Имя: ${name}
-📱 ${contactType}: ${contact}
+📱 Контакты: 
+${contact}
 💬 Задача: ${message || 'не указана'}
-
-⏰ ${new Date().toLocaleString('ru-RU', { 
+⏰ ${new Date().toLocaleString('ru-RU', {
   timeZone: 'Asia/Tashkent',
-  year: 'numeric',
+  year: 'numeric', 
   month: '2-digit',
   day: '2-digit',
   hour: '2-digit',
   minute: '2-digit'
 })}`;
-
     // Отправляем сообщение в Telegram
     const telegramResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       method: 'POST',
